@@ -59,8 +59,9 @@ buttons.forEach((item) => {
         break
       case '=':
         try {
-          lowScreen.innerText = evaluate(lowScreen.innerText)
+          evaluate(lowScreen.innerText)
           screen.innerText = lowScreen.innerText
+          lowScreen.innerText = evaluate(lowScreen.innerText)
         } catch (error) {
           const cache = lowScreen.innerText
           lowScreen.innerText = 'error'
