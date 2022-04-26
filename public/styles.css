@@ -132,9 +132,21 @@ button[data-operator='+'] {
   grid-area: ADD;
   font-size: var(--number-size);
 }
-button[data-action='='] {
+.EQ {
   grid-area: CALC;
   font-size: var(--number-size);
+  color: #202020;
+  background: rgb(105, 102, 218);
+  background: linear-gradient(
+    45deg,
+    rgba(105, 102, 218, 1) 0%,
+    rgba(0, 221, 255, 1) 100%
+  );
+  transition: 300ms;
+}
+
+.EQ:hover {
+  color: white;
 }
 
 #screen {
