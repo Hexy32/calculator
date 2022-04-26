@@ -27,6 +27,11 @@ buttons.forEach((item) => {
         lastCharactor === '+' ||
         lastTwoCharactors === '--'
       ) {
+        lowScreen.innerText = lowScreen.innerText.slice(
+          0,
+          lowScreen.innerText.length - 1
+        )
+        lowScreen.textContent += button.innerText
         return
       }
       lowScreen.textContent += button.innerText
