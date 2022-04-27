@@ -185,6 +185,7 @@ button[data-operator='+'] {
   word-wrap: break-word;
   hyphens: auto;
   text-align: center;
+  transition: 500ms ease;
 }
 
 .hint > span:nth-of-type(1) {
@@ -192,4 +193,9 @@ button[data-operator='+'] {
   top: 5px;
   right: 10px;
   cursor: pointer;
+}
+
+.removed {
+  top: -30px;
+  opacity: 0;
 }

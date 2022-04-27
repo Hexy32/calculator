@@ -10,7 +10,7 @@ const hintElement = document.querySelectorAll(
 )[0] as HTMLParagraphElement
 
 hintElement.children[3].addEventListener('click', () => {
-  hintElement.style.display = 'none'
+  hintElement.classList.add('removed')
   ctrlHintEnable = false
 })
 
@@ -33,7 +33,7 @@ document.addEventListener('keydown', (e) => {
         adjustedKey = 'AC'
         ctrlHintEnable = false
         localStorage.setItem('ctrlHintEnable', 'false')
-        hintElement.style.display = 'none'
+        hintElement.classList.add('removed')
       } else {
         adjustedKey = 'DEL'
       }
@@ -44,7 +44,7 @@ document.addEventListener('keydown', (e) => {
         adjustedKey = 'AC'
         ctrlHintEnable = false
         localStorage.setItem('ctrlHintEnable', 'false')
-        hintElement.style.display = 'none'
+        hintElement.classList.add('removed')
       } else {
         adjustedKey = 'DEL'
       }
@@ -52,6 +52,8 @@ document.addEventListener('keydown', (e) => {
       break
     case 'l':
       console.log(ctrlHintEnable)
+      console.log(timesPressedConcecutivly)
+
       break
     case 'c':
       localStorage.removeItem('ctrlHintEnable')
@@ -75,8 +77,8 @@ function hint(buttonPressed: string) {
   } else {
     timesPressedConcecutivly = 0
   }
-  if (timesPressedConcecutivly > 5) {
-    hintElement.style.display = 'block'
+  if (timesPressedConcecutivly >= 3) {
+    hintElement.classList.remove('removed')
   }
 }
 
