@@ -3,19 +3,91 @@ import { evaluate } from 'mathjs'
 const buttons = document.querySelectorAll('button')
 const screen = document.getElementById('screen') as HTMLDivElement
 const lowScreen = document.getElementById('low-screen') as HTMLDivElement
+let ctrlHintEnable = true
+let timesPressedConcecutivly: number
+const hintElement = document.querySelectorAll(
+  '.hint'
+)[0] as HTMLParagraphElement
 
-document.addEventListener('keypress', (e) => {
-  console.log(e.key)
+hintElement.children[3].addEventListener('click', () => {
+  hintElement.style.display = 'none'
+  ctrlHintEnable = false
 })
+
+if (
+  localStorage.getItem('ctrlHintEnable') != null &&
+  localStorage.getItem('ctrlHintEnable') == 'false'
+) {
+  ctrlHintEnable = false
+}
+
+document.addEventListener('keydown', (e) => {
+  let adjustedKey: string
+  switch (e.key) {
+    case 'Enter':
+      adjustedKey = '='
+      manageInput(adjustedKey)
+      break
+    case 'Backspace':
+      if (e.ctrlKey === true) {
+        adjustedKey = 'AC'
+        ctrlHintEnable = false
+        localStorage.setItem('ctrlHintEnable', 'false')
+        hintElement.style.display = 'none'
+      } else {
+        adjustedKey = 'DEL'
+      }
+      manageInput(adjustedKey)
+      break
+    case 'Delete':
+      if (e.ctrlKey === true) {
+        adjustedKey = 'AC'
+        ctrlHintEnable = false
+        localStorage.setItem('ctrlHintEnable', 'false')
+        hintElement.style.display = 'none'
+      } else {
+        adjustedKey = 'DEL'
+      }
+      manageInput(adjustedKey)
+      break
+    case 'l':
+      console.log(ctrlHintEnable)
+      break
+    case 'c':
+      localStorage.removeItem('ctrlHintEnable')
+      ctrlHintEnable = true
+      break
+    default:
+      manageInput(e.key)
+  }
+  hint(e.key)
+})
+
+function hint(buttonPressed: string) {
+  if (typeof timesPressedConcecutivly !== 'number') {
+    timesPressedConcecutivly = 0
+  }
+  if (
+    (buttonPressed === 'Backspace' || buttonPressed === 'Delete') &&
+    ctrlHintEnable
+  ) {
+    timesPressedConcecutivly++
+  } else {
+    timesPressedConcecutivly = 0
+  }
+  if (timesPressedConcecutivly > 5) {
+    hintElement.style.display = 'block'
+  }
+}
 
 buttons.forEach((item) => {
   item.addEventListener('click', (event) => {
     const button = event.currentTarget as HTMLButtonElement
-    manangeNumber(button.innerText)
+    manageInput(button.innerText)
   })
 })
 
-function manangeNumber(key: string) {
+function manageInput(key: string): void {
   //Numbers
   try {
     const keyParsed = JSON.parse(key)

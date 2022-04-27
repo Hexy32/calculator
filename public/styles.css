@@ -170,3 +170,26 @@ button[data-operator='+'] {
   color: var(--text-color-error);
   text-shadow: 0px 0px 7px var(--text-color-error);
 }
+
+.hint {
+  width: auto;
+  position: fixed;
+  background-color: #222;
+  color: var(--text-color);
+  text-shadow: 0px 0px 7px var(--text-color);
+  font-weight: lighter;
+  padding: 10px;
+  border-radius: 0px 0px 5px 5px;
+  top: 0;
+  padding-right: 30px;
+  word-wrap: break-word;
+  hyphens: auto;
+  text-align: center;
+}
+
+.hint > span:nth-of-type(1) {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
