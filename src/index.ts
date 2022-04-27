@@ -12,12 +12,10 @@ const hintElement = document.querySelectorAll(
 hintElement.children[3].addEventListener('click', () => {
   hintElement.classList.add('removed')
   ctrlHintEnable = false
+  localStorage.setItem('ctrlHintEnable', 'n')
 })
 
-if (
-  localStorage.getItem('ctrlHintEnable') != null &&
-  localStorage.getItem('ctrlHintEnable') == 'false'
-) {
+if (localStorage.getItem('ctrlHintEnable') == 'n') {
   ctrlHintEnable = false
 }
 
@@ -32,7 +30,7 @@ document.addEventListener('keydown', (e) => {
       if (e.ctrlKey === true) {
         adjustedKey = 'AC'
         ctrlHintEnable = false
-        localStorage.setItem('ctrlHintEnable', 'false')
+        localStorage.setItem('ctrlHintEnable', 'n')
         hintElement.classList.add('removed')
       } else {
         adjustedKey = 'DEL'
@@ -43,7 +41,7 @@ document.addEventListener('keydown', (e) => {
       if (e.ctrlKey === true) {
         adjustedKey = 'AC'
         ctrlHintEnable = false
-        localStorage.setItem('ctrlHintEnable', 'false')
+        localStorage.setItem('ctrlHintEnable', 'n')
         hintElement.classList.add('removed')
       } else {
         adjustedKey = 'DEL'
@@ -51,13 +49,14 @@ document.addEventListener('keydown', (e) => {
       manageInput(adjustedKey)
       break
     case 'l':
-      console.log(ctrlHintEnable)
-      console.log(timesPressedConcecutivly)
+      console.log({ ctrlHintEnable })
+      console.log({ timesPressedConcecutivly })
 
       break
     case 'c':
-      localStorage.removeItem('ctrlHintEnable')
+      localStorage.clear
       ctrlHintEnable = true
+      console.log('Data cleared.')
       break
     default:
       manageInput(e.key)
