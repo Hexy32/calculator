@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  --text-color: rgb(0, 221, 255);
+  --text-color-error: rgb(255, 38, 0);
+  --number-size: 1.7rem;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  background-color: #111;
+  font-family: 'Cousine', monospace;
+  font-weight: 700;
+}
+
+.container {
+  display: grid;
+  width: min-content;
+  background-color: #202020;
+  color: var(--text-color);
+  text-shadow: 0px 0px 7px var(--text-color);
+  padding: 10px;
+  border-radius: 10px;
+  gap: 7px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    'screen screen screen screen'
+    'low-screen low-screen low-screen low-screen'
+    'AC AC DEL MLT'
+    'SEVEN EIGHT NINE DIV'
+    'FOUR FIVE SIX SUB'
+    'ONE TWO THREE ADD'
+    'ZERO ZERO PER CALC';
+}
+
+button {
+  background-color: #3b3b3b;
+  color: inherit;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  text-shadow: inherit;
+  transition: 300ms ease;
+  cursor: pointer;
+  min-width: 5rem;
+  height: 5rem;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+button[data-action='DEL'] {
+  grid-area: DEL;
+}
+button[data-action='AC'] {
+  grid-area: AC;
+}
+button[data-number='1'] {
+  grid-area: ONE;
+  font-size: var(--number-size);
+}
+button[data-number='2'] {
+  grid-area: TWO;
+  font-size: var(--number-size);
+}
+button[data-number='3'] {
+  grid-area: THREE;
+  font-size: var(--number-size);
+}
+button[data-number='4'] {
+  grid-area: FOUR;
+  font-size: var(--number-size);
+}
+button[data-number='5'] {
+  grid-area: FIVE;
+  font-size: var(--number-size);
+}
+button[data-number='6'] {
+  grid-area: SIX;
+  font-size: var(--number-size);
+}
+button[data-number='7'] {
+  grid-area: SEVEN;
+  font-size: var(--number-size);
+}
+button[data-number='8'] {
+  grid-area: EIGHT;
+  font-size: var(--number-size);
+}
+button[data-number='9'] {
+  grid-area: NINE;
+  font-size: var(--number-size);
+}
+button[data-number='0'] {
+  grid-area: ZERO;
+  font-size: var(--number-size);
+}
+button[data-number='.'] {
+  grid-area: PER;
+  font-size: var(--number-size);
+}
+button[data-operator='*'] {
+  grid-area: MLT;
+  font-size: var(--number-size);
+}
+button[data-operator='/'] {
+  grid-area: DIV;
+  font-size: var(--number-size);
+}
+button[data-operator='-'] {
+  grid-area: SUB;
+  font-size: var(--number-size);
+}
+button[data-operator='+'] {
+  grid-area: ADD;
+  font-size: var(--number-size);
+}
+.EQ {
+  grid-area: CALC;
+  font-size: var(--number-size);
+  color: #202020;
+  background: rgb(105, 102, 218);
+  background: linear-gradient(
+    45deg,
+    rgba(105, 102, 218, 1) 0%,
+    rgba(0, 221, 255, 1) 100%
+  );
+  transition: 300ms;
+}
+
+.EQ:hover {
+  color: white;
+}
+
+#screen {
+  grid-area: screen;
+  text-align: right;
+  font-size: 1.3rem;
+  font-weight: lighter;
+  min-height: 1.5rem;
+  word-wrap: break-word;
+}
+
+#low-screen {
+  min-height: 3rem;
+  grid-area: low-screen;
+  text-align: right;
+  word-wrap: break-word;
+  font-size: 3rem;
+}
+
+.error {
+  color: var(--text-color-error);
+  text-shadow: 0px 0px 7px var(--text-color-error);
+}
+
+.hint {
+  width: auto;
+  position: fixed;
+  background-color: #222;
+  color: var(--text-color);
+  text-shadow: 0px 0px 7px var(--text-color);
+  font-weight: lighter;
+  padding: 10px;
+  border-radius: 0px 0px 5px 5px;
+  top: 0;
+  padding-right: 30px;
+  word-wrap: break-word;
+  hyphens: auto;
+  text-align: center;
+  transition: 500ms ease;
+}
+
+.hint > span:nth-of-type(1) {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.removed {
+  top: -30px;
+  opacity: 0;
+}
