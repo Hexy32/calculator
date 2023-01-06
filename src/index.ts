@@ -4,7 +4,7 @@ const buttons = document.querySelectorAll('button')
 const screen = document.getElementById('screen') as HTMLDivElement
 const lowScreen = document.getElementById('low-screen') as HTMLDivElement
 let ctrlHintEnable = true
-let timesPressedConcecutivly: number
+let timesPressedConsecutively: number
 const hintElement = document.querySelectorAll(
   '.hint'
 )[0] as HTMLParagraphElement
@@ -50,7 +50,7 @@ document.addEventListener('keydown', (e) => {
       break
     case 'l':
       console.log({ ctrlHintEnable })
-      console.log({ timesPressedConcecutivly })
+      console.log({ timesPressedConcecutivly: timesPressedConsecutively })
 
       break
     case 'c':
@@ -65,18 +65,18 @@ document.addEventListener('keydown', (e) => {
 })
 
 function hint(buttonPressed: string) {
-  if (typeof timesPressedConcecutivly !== 'number') {
-    timesPressedConcecutivly = 0
+  if (typeof timesPressedConsecutively !== 'number') {
+    timesPressedConsecutively = 0
   }
   if (
     (buttonPressed === 'Backspace' || buttonPressed === 'Delete') &&
     ctrlHintEnable
   ) {
-    timesPressedConcecutivly++
+    timesPressedConsecutively++
   } else {
-    timesPressedConcecutivly = 0
+    timesPressedConsecutively = 0
   }
-  if (timesPressedConcecutivly >= 3) {
+  if (timesPressedConsecutively >= 3) {
     hintElement.classList.remove('removed')
   }
 }
