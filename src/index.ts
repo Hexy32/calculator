@@ -5,9 +5,7 @@ const screen = document.getElementById('screen') as HTMLDivElement
 const lowScreen = document.getElementById('low-screen') as HTMLDivElement
 let ctrlHintEnable = true
 let timesPressedConsecutively: number
-const hintElement = document.querySelectorAll(
-  '.hint'
-)[0] as HTMLParagraphElement
+const hintElement = document.querySelectorAll('.hint')[0] as HTMLParagraphElement
 
 hintElement.children[3].addEventListener('click', () => {
   hintElement.classList.add('removed')
@@ -19,7 +17,7 @@ if (localStorage.getItem('ctrlHintEnable') == 'n') {
   ctrlHintEnable = false
 }
 
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', e => {
   let adjustedKey: string
   switch (e.key) {
     case 'Enter':
@@ -68,10 +66,7 @@ function hint(buttonPressed: string) {
   if (typeof timesPressedConsecutively !== 'number') {
     timesPressedConsecutively = 0
   }
-  if (
-    (buttonPressed === 'Backspace' || buttonPressed === 'Delete') &&
-    ctrlHintEnable
-  ) {
+  if ((buttonPressed === 'Backspace' || buttonPressed === 'Delete') && ctrlHintEnable) {
     timesPressedConsecutively++
   } else {
     timesPressedConsecutively = 0
@@ -81,8 +76,8 @@ function hint(buttonPressed: string) {
   }
 }
 
-buttons.forEach((item) => {
-  item.addEventListener('click', (event) => {
+buttons.forEach(item => {
+  item.addEventListener('click', event => {
     const button = event.currentTarget as HTMLButtonElement
     manageInput(button.innerText)
   })
@@ -102,10 +97,7 @@ function manageInput(key: string): void {
       return
     }
   } catch (error) {
-    if (
-      key === '.' &&
-      lowScreen.textContent![lowScreen.textContent!.length - 1] != '.'
-    ) {
+    if (key === '.' && lowScreen.textContent![lowScreen.textContent!.length - 1] != '.') {
       lowScreen.textContent += key
     }
   }
@@ -118,10 +110,7 @@ function manageInput(key: string): void {
       break
     case 'DEL':
       if (lowScreen.innerText != '0') {
-        lowScreen.innerText = lowScreen.innerText.slice(
-          0,
-          lowScreen.innerText.length - 1
-        )
+        lowScreen.innerText = lowScreen.innerText.slice(0, lowScreen.innerText.length - 1)
       }
       if (lowScreen.innerText === '') {
         lowScreen.innerText = '0'
@@ -153,8 +142,7 @@ function manageInput(key: string): void {
       return
     }
     const lastCharactor = lowScreen.innerText[lowScreen.innerText.length - 1]
-    const lastTwoCharactors =
-      lowScreen.innerText[lowScreen.innerText.length - 2] + lastCharactor
+    const lastTwoCharactors = lowScreen.innerText[lowScreen.innerText.length - 2] + lastCharactor
 
     if (lastTwoCharactors !== '--' && key === '-') {
       lowScreen.textContent += key
@@ -167,10 +155,7 @@ function manageInput(key: string): void {
       lastCharactor === '+' ||
       lastTwoCharactors === '--'
     ) {
-      lowScreen.innerText = lowScreen.innerText.slice(
-        0,
-        lowScreen.innerText.length - 1
-      )
+      lowScreen.innerText = lowScreen.innerText.slice(0, lowScreen.innerText.length - 1)
       lowScreen.textContent += key
       return
     }
